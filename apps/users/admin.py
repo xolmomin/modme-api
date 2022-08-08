@@ -29,3 +29,21 @@ class CourseAdmin(admin.ModelAdmin):
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
     list_display = ['id', 'name']
+
+'''
+superadmin - hamma ishni qiladi
+admin      - moderator crud
+
+/admin
+
+moderator  - teacherlar va studentlarni crud
+teacher    - oziga tegishli kurslarni koradi va 
+ozini kursiga student qoshadi yo ob tashaydi
+
+/moderator
+
+
+student
+
+
+'''

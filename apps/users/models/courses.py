@@ -21,6 +21,7 @@ class Course(BaseModel, DeletedModel):  # Kurslar
     is_enabled = BooleanField(default=True)
 
 
+
 '''
 
 class Template

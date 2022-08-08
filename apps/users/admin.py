@@ -1,3 +1,31 @@
 from django.contrib import admin
 
-# Register your models here.
+from django.contrib import admin
+
+from users.models import Company, Branch, Course
+from users.models.courses import Room
+
+
+# @admin.register(Branch)
+class BranchTabularInline(admin.TabularInline):
+    model = Branch
+    min_num = 1
+    extra = 1
+    fields = ['name', 'is_recalculation_on']
+
+
+@admin.register(Company)
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']
+
+    inlines = [BranchTabularInline]
+
+
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']
+
+
+@admin.register(Room)
+class RoomAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']

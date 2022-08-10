@@ -26,18 +26,20 @@ class Branch(BaseModel, DeletedModel):  # Filial
     is_recalculation_on = BooleanField(default=True)
 
 
-
 class Role(Model):
-    'CEO'
-    'Branch'
-    'Director'
-    'Administrator'
-    'Limited'
-    'Administrator'
-    'Teacher'
-    'Student'
-    'Marketer'
-    'Cashier'
     name = CharField(max_length=255)
 
 
+'''
+CEO
+Branch
+Director
+Administrator
+Limited
+Administrator
+Teacher
+Student
+Marketer
+Cashier
+
+'''

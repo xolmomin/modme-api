@@ -49,9 +49,11 @@ INSTALLED_APPS = [
 
     # Third-party
     'rest_framework',
+    'rest_framework.authtoken',
     'django_filters',
     'drf_yasg'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -147,10 +149,13 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.BasicAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ],
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DATETIME_FORMAT': '%Y-%m-%d %H:%M:%S',
-    # 'DEFAULT_PAGINATION_CLASS': 'apps.shared.rest_framework.pagination.PageNumberPagination',
-    # 'PAGE_SIZE': 10
+    'DEFAULT_PAGINATION_CLASS': 'apps.shared.rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
 }
 
 LOGIN_URL = '/admin'
@@ -169,5 +174,75 @@ SWAGGER_SETTINGS = {
             'in': 'header',
             'description': 'Type in the *\'Value\'* input box below: **\'Bearer &lt;JWT&gt;\'**, where JWT is the JSON web token you get back when logging in.'
         }
+    }
+}
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'console': {
+#             'format': '%(name)-12s %(levelname)-8s %(message)s'
+#         },
+#         'file': {
+#             'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
+#         }
+#     },
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'console'
+#         },
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'formatter': 'file',
+#             'filename': 'debug.log'
+#         }
+#     },
+#     'loggers': {
+#         '': {
+#             'level': 'DEBUG',
+#             'handlers': ['console', 'file']
+#         }
+#     }
+# }
+
+LOGGING = {
+    'version': 1,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+        }
+    }
+}
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '856489160437-3qe1ftmu6teq8tchelvs201sdpsdpcri.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
     }
 }
